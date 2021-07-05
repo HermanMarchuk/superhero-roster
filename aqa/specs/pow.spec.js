@@ -1,5 +1,10 @@
-import {pow} from '../scripts/pow'
-
+const pow = (x, n) => { // for testing purposes
+  let result = x;
+  for (let i = 1; i < n; i += 1) {
+    result = result * x;
+  }
+  return result;
+};
 const {expect} = require('chai');
 
 describe('Pow mathematical operation', () => {
