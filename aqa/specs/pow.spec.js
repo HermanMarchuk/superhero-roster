@@ -1,10 +1,4 @@
-const pow = (x, n) => { // for testing purposes
-  let result = x;
-  for (let i = 1; i < n; i += 1) {
-    result = result * x;
-  }
-  return result;
-};
+const {pow} = require('../dev/functions')
 const {expect} = require('chai');
 
 describe('Pow', () => {
