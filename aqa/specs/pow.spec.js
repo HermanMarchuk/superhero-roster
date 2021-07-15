@@ -7,7 +7,7 @@ const pow = (x, n) => { // for testing purposes
 };
 const {expect} = require('chai');
 
-describe('Pow mathematical operation', () => {
+describe('Pow', () => {
 
   it('C123', () => {
     const expectedResult = 27;
