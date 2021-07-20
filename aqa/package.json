@@ -1,11 +1,9 @@
 {
   "scripts": {
-    "test": "mocha specs/pow.spec.js --reporter mochawesome",
-    "hometask": "mocha specs/camelize.spec.js --reporter mochawesome"
+    "test": "protractor conf.js"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.0.2",
-    "mochawesome": "^6.2.2"
+    "jasmine-spec-reporter": "^7.0.0",
+    "protractor": "^7.0.0"
   }
 }
