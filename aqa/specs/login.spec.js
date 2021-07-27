@@ -5,23 +5,57 @@ describe('Login Test Suite', () => {
         loginField: '#loginEmail',
         passwordField: '#loginPassword',
         rememberLoginCheckBox: '#rememberLoginChk',
-        submitButton: '[type="submit"]'
+        submitButton: '[type="submit"]',
+        validationAlert: '#login-alert'
+    }
+    const credentals = {
+        correctEmail: 'asdasd@asdasd.asd',
+        correctPassword: 'asdasd',
+        invalidEmail: '1.1',
+        
     }
 
     it('Login: positive testing', () => {
-        const correctUserData = {
-            'email': 'asdasd@asdasd.asd',
-            'password': 'asdasd'
-        };
         let isLoginPageDisplayed = null
 
         browser.get(endpoint);
 
-        element(by.css(loginPageElements.loginField)).sendKeys(correctUserData.email);
-        element(by.css(loginPageElements.passwordField)).sendKeys(correctUserData.password);
+        element(by.css(loginPageElements.loginField)).sendKeys(credentals.correctEmail);
+        element(by.css(loginPageElements.passwordField)).sendKeys(credentals.correctPassword);
         element(by.css(loginPageElements.submitButton)).click();
 
         isLoginPageDisplayed = element(by.css(loginPageElements.itself)).isDisplayed();
         expect(isLoginPageDisplayed).toEqual(false);
+    });
+
+    it('Login: invalid Email', () => {
+        let isLoginPageDisplayed = null
+
+        browser.get(endpoint);
+
+        element(by.css(loginPageElements.loginField)).sendKeys(credentals.invalidEmail);
+        element(by.css(loginPageElements.passwordField)).sendKeys(credentals.correctPassword);
+        element(by.css(loginPageElements.submitButton)).click();
+
+        isLoginPageDisplayed = element(by.css(loginPageElements.itself)).isDisplayed();
+        expect(isLoginPageDisplayed).toEqual(true);
+    });
+
+    it('Login: Login without password is forbidden', () => {
+        let isAlertDisplayed = null
+
+        browser.get(endpoint); 
+
+        element(by.css(loginPageElements.submitButton)).click(); 
+        
+        isAlertDisplayed = element(by.css(loginPageElements.validationAlert)).isDisplayed();
+        expect(isAlertDisplayed).toEqual(true);
+
+        element(by.css(loginPageElements.loginField)).sendKeys(credentals.correctEmail);
+        element(by.css(loginPageElements.submitButton)).click(); 
+
+        isAlertDisplayed = element(by.css(loginPageElements.validationAlert)).isDisplayed();
+        expect(isAlertDisplayed).toEqual(true);
+
     });
 });
