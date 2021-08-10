@@ -10,6 +10,13 @@ const dataPacks = {
   ],
   invalidHeroes: [
     '', '', '', '', '', ''
+  ],
+  movieHeroes: [
+    'X-Men',
+    'Avengers',
+    'Deadpool',
+    'Spider-Man Homecoming',
+    'Iron Man'
   ]
 };
 

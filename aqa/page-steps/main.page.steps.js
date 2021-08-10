@@ -13,7 +13,19 @@ function addIncorrectHero(incorrectHero) {
   expect(mainPage.rosterFragment.alertDanger.isDisplayed()).toEqual(true);
 };
 
+function voteForHero(movie) {
+  const votesBefore = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
+  let votesAfter = null;
+
+  mainPage.voteFragment.favoriteMoviesFragment.getMovieRadioButton(movie).click();
+  mainPage.voteFragment.favoriteMoviesFragment.submitButton.click();
+  votesAfter = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
+
+  expect(votesBefore).not.toEqual(votesAfter)
+}
+
 module.exports = {
   addHero,
-  addIncorrectHero
+  addIncorrectHero,
+  voteForHero
 };

@@ -2,7 +2,7 @@ const {SpecReporter} = require('jasmine-spec-reporter')
 
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./specs/add.hero.spec.js'],
+    specs: ['./specs/vote.spec.js'],
     frameworks: 'jasmine2',
     jasmineNodeOpts: {
         showColors: true,
