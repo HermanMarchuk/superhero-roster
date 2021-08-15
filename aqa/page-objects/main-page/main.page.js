@@ -1,4 +1,4 @@
-const headerFragment = require('../main-page/fragments/header.fragment');
+const headerFragment = require('./fragments/header-fragment/header.fragment');
 const rosterFragment = require('../main-page/fragments/roster.fragment');
 const voteFragment = require('../main-page/fragments/vote-fragment/vote.fragment');
 
