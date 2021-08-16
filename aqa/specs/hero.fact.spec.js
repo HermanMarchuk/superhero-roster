@@ -1,6 +1,7 @@
 const creds = require('../fixtures/creds');
 const loginIntoRoster = require('../page-steps/login.page.steps');
 const mainPage = require('../page-objects/main-page/main.page');
+const {waitForVisibility} = require('../helpers/wait');
 
 describe('Hero Facts', () => {
 
@@ -16,7 +17,7 @@ describe('Hero Facts', () => {
         heroFactsFragment.heroFactsListLink.click();
         heroFactsFragment.wolverineItem.click();
 
-        heroFactsFragment.wolverineModal.waitForVisibility();
+        waitForVisibility(heroFactsFragment.wolverineModal);
 
         expect(heroFactsFragment.wolverineModal.itself.isDisplayed()).toEqual(true);
 
