@@ -7,11 +7,7 @@ function getHeroFactModal(hero) {
     get itself() {return $(`#${hero}Modal`)},
     get headerText() {return $(`#${hero}ModalLabel`)},
     get bodyText() {return $('.modal-body')},
-    get closeButton() {return $('.modal-footer button')},
-    waitForVisibility() {
-      const EC = protractor.ExpectedConditions;
-      return browser.wait(EC.visibilityOf(this.itself), 5000, 'Expected that modal is visible but it\'s not')
-    }
+    get closeButton() {return $('.modal-footer button')}
   }
 }
 
