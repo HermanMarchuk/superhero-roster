@@ -17,7 +17,7 @@ describe('Hero Facts', () => {
         heroFactsFragment.heroFactsListLink.click();
         heroFactsFragment.wolverineItem.click();
 
-        waitForVisibility(heroFactsFragment.wolverineModal);
+        waitForVisibility(heroFactsFragment.wolverineModal.itself);
 
         expect(heroFactsFragment.wolverineModal.itself.isDisplayed()).toEqual(true);
 

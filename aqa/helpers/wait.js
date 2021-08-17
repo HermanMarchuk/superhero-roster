@@ -8,8 +8,8 @@ function waitForAlertAndValidateText(text) {
   browser.switchTo().alert().accept();
 };
 
-function waitForVisibility() {
-  return browser.wait(EC.visibilityOf(this.itself), timings.s, 'Expected that modal is visible but it\'s not')
+function waitForVisibility(element) {
+  return browser.wait(EC.visibilityOf(element), timings.s, 'Expected that element is visible but it\'s not')
 }
 
 module.exports = {
