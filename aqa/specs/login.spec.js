@@ -14,4 +14,16 @@ describe('Login Test Suite', () => {
         expect(loginPage.itself().isDisplayed()).toEqual(false);
     });
 
+    it('C994', () => {
+        browser.get(endpoints.main);
+
+        loginPage.loginField().sendKeys(creds.incorrectUserData.email);
+        loginPage.passwordField().sendKeys(creds.correctUserData.password);
+        loginPage.submitButton().click();
+
+        expect(loginPage.itself().isDisplayed()).toEqual(true);
+    });
+
+    
+
 });
