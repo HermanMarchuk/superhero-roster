@@ -1,15 +1,19 @@
+const {Given} = require('@cucumber/cucumber');
+const {expect} = require('chai');
 const endpoints = require('../configs/endpoints.config');
 const loginPage = require('../page-objects/login.page');
+const creds = require('../fixtures/creds');
 
 
-function loginIntoRoster(creds) {
-  browser.get(endpoints.main);
+Given('I logged in application', async () => {
+  let isLoginPageDisplayed = null;
 
-  loginPage.loginField().sendKeys(creds.email);
-  loginPage.passwordField().sendKeys(creds.password);
-  loginPage.submitButton().click();
+  await browser.get(endpoints.main);
+  await loginPage.loginField().sendKeys(creds.correctUserData.email);
+  await loginPage.passwordField().sendKeys(creds.correctUserData.password);
+  await loginPage.submitButton().click();
+  isLoginPageDisplayed= await loginPage.itself().isDisplayed()
 
-  expect(loginPage.itself().isDisplayed()).toEqual(false);
-}
 
-module.exports = loginIntoRoster;
+  expect(isLoginPageDisplayed).to.eql(false);
+});

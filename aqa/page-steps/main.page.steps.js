@@ -1,31 +1,32 @@
+const {Given, When, Then} = require('@cucumber/cucumber');
+const {expect} = require('chai');
 const mainPage = require('../page-objects/main-page/main.page');
 
-function addHero(hero) {
-  mainPage.rosterFragment.addHeroInput.sendKeys(hero);
-  mainPage.rosterFragment.addHeroButton.click();
-  expect(mainPage.rosterFragment.heroList.getText()).toContain(hero);
-};
+When('I add hero {string} to the roster', async (string) => {
+  await mainPage.rosterFragment.addHeroInput.sendKeys(string);
+  await mainPage.rosterFragment.addHeroButton.click();
+});
 
-function addIncorrectHero(incorrectHero) {
-  mainPage.rosterFragment.addHeroInput.sendKeys(incorrectHero);
-  mainPage.rosterFragment.addHeroButton.click();
-  expect(mainPage.rosterFragment.heroList.getText()).not.toContain(incorrectHero);
-  expect(mainPage.rosterFragment.alertDanger.isDisplayed()).toEqual(true);
-};
+Then('I should see hero {string} in the roster', async (string) => {
+  const heroList = await mainPage.rosterFragment.heroList.getText();
+  expect(heroList).to.include(string);
+});
 
-function voteForHero(movie) {
-  const votesBefore = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
-  let votesAfter = null;
+Then('I shouldn\'t see hero {string} in the roster', async (string) => {
+  const heroList = await mainPage.rosterFragment.heroList.getText();
+  const isAlertDisplayed = await mainPage.rosterFragment.alertDanger.isDisplayed();
 
-  mainPage.voteFragment.favoriteMoviesFragment.getMovieRadioButton(movie).click();
-  mainPage.voteFragment.favoriteMoviesFragment.submitButton.click();
-  votesAfter = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
+  expect(heroList).to.not.include(string);
+  expect(isAlertDisplayed).to.eql(true);
+});
 
-  expect(votesBefore).not.toEqual(votesAfter)
-}
+// function voteForHero(movie) {
+//   const votesBefore = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
+//   let votesAfter = null;
 
-module.exports = {
-  addHero,
-  addIncorrectHero,
-  voteForHero
-};
+//   mainPage.voteFragment.favoriteMoviesFragment.getMovieRadioButton(movie).click();
+//   mainPage.voteFragment.favoriteMoviesFragment.submitButton.click();
+//   votesAfter = mainPage.voteFragment.moviesTableFragment.getDataFromMoviesTable(movie).vote.getText();
+
+//   expect(votesBefore).not.toEqual(votesAfter)
+// }

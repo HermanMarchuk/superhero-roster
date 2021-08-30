@@ -1,12 +1,13 @@
-const {SpecReporter} = require('jasmine-spec-reporter');
-const AllureReporter = require('jasmine-allure-reporter');
-
 exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    specs: ['./specs/vote.spec.js'],
+    framework: 'custom',
+    frameworkPath: require.resolve('protractor-cucumber-framework'),
+    SELENIUM_PROMISE_MANAGER: false,
+    specs: ['./features/*.feature'],
+    cucumberOpts: {
+        require: ['./page-steps/*.js']
+    },
     onPrepare () {
         browser.waitForAngularEnabled(false);
-        jasmine.getEnv().addReporter(new SpecReporter());
-        jasmine.getEnv().addReporter(new AllureReporter({resultsDir: 'allure-results'}))
     }
 };
